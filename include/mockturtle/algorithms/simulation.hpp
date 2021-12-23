@@ -135,6 +135,81 @@ private:
   unsigned num_vars;
 };
 
+
+class sim_spl
+{
+public:
+  sim_spl() = delete;
+  sim_spl( unsigned split_var, uint64_t it ) : split_var{split_var}, it{it} {}
+
+  kitty::dynamic_truth_table compute_constant( bool value ) const
+  {
+    kitty::dynamic_truth_table tt( split_var );
+    return value ? ~tt : tt;
+  }
+
+  kitty::dynamic_truth_table compute_pi( uint32_t index ) const
+  {
+    kitty::dynamic_truth_table tt( split_var );
+    if (index < split_var) { 
+      kitty::create_nth_var( tt, index ); 
+    } else {
+      bool value = (it >> (index-split_var)) & 1;
+      if (!value) {
+        tt = ~tt;
+      }
+    }
+
+    return tt;
+  }
+
+  kitty::dynamic_truth_table compute_not( kitty::dynamic_truth_table const& value ) const
+  {
+    return ~value;
+  }
+
+private:
+  unsigned split_var;
+  uint64_t it;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*! \brief Simulates truth tables.
  *
  * This simulator simulates truth tables.  Each primary input is assigned the
