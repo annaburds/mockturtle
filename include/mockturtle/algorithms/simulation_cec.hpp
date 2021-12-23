@@ -1,3 +1,4 @@
+
 /* mockturtle: C++ logic network library
  * Copyright (C) 2018-2021  EPFL
  *
@@ -194,3 +195,4 @@ std::optional<bool> simulation_cec( Ntk const& ntk1, Ntk const& ntk2, simulation
 }
 
 } // namespace mockturtle
+
